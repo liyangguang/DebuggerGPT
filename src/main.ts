@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
-import { DebuggerGPT } from './agent';
-import type { Config } from './types';
+import { DebuggerGPT } from './lib/agent';
+import type { Config } from './lib/types';
 
 dotenv.config();
 
