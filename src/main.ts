@@ -8,7 +8,7 @@ dotenv.config();
 const config: Config = {
   codeRoutepath: process.env.CODE_ROOT_PATH || '/Users/liyangguang',
   verbosity: 'step-only',
-  // maxIterations: 3,
+  maxIterations: 3,
 };
 
 async function start() {

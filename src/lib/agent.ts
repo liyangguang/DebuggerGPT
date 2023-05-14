@@ -13,15 +13,17 @@ const model = new OpenAI({ openAIApiKey: process.env.OPENAI_API_KEY, temperature
 export class DebuggerGPT {
   private codeRootPath: string = '';
   private executorPromise: Promise<AgentExecutor>;
+  private returnIntermediateSteps: boolean;
 
   constructor(config: Config) {
     this.codeRootPath = config.codeRoutepath;
+    this.returnIntermediateSteps = ['step-only', 'everything'].includes(config.verbosity!);
     this.executorPromise = initializeAgentExecutorWithOptions(
       [new FileReaderTool(this.codeRootPath)],
       model,
       {
         agentType: "zero-shot-react-description",
-        returnIntermediateSteps: ['step-only', 'everything'].includes(config.verbosity!),
+        returnIntermediateSteps: this.returnIntermediateSteps,
         verbose: config.verbosity === 'everything',
         maxIterations: config.maxIterations || DEFAULT_MAX_ITERATIONS,
       },
@@ -36,6 +38,10 @@ export class DebuggerGPT {
 
     const executor = await this.executorPromise;
     const result = await executor.call({ input });
+
+    if (this.returnIntermediateSteps) {
+      console.debug(result.intermediateSteps);
+    }
   
     console.info('[DebuggerGPT] Agent finished!');
     return result.output;
