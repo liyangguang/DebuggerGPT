@@ -1,0 +1,33 @@
+{
+  "name": "debugger-gpt",
+  "version": "0.1.0",
+  "description": "An LLM that debugs code like a human being.",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
+    "build": "tsc",
+    "prod": "npm run build && node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liyangguang/DebuggerGPT.git"
+  },
+  "keywords": [],
+  "author": "Yangguang Li <liyangguangcn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liyangguang/DebuggerGPT/issues"
+  },
+  "homepage": "https://github.com/liyangguang/DebuggerGPT#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "langchain": "^0.0.75",
+    "typeorm": "^0.3.16"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  }
+}
